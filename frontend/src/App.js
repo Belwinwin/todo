@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './App.css'; // Make sure this import is here!
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -48,33 +49,32 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '2rem auto', fontFamily: 'sans-serif' }}>
+    <div className="todo-container">
       <h2>To-Do List</h2>
-      <form onSubmit={addTodo} style={{ marginBottom: '1rem' }}>
+      <form onSubmit={addTodo} className="todo-form">
         <input
           value={text}
           onChange={e => setText(e.target.value)}
           placeholder="Add a new task"
-          style={{ width: '70%', padding: '0.5rem' }}
+          className="todo-input"
         />
-        <button type="submit" style={{ padding: '0.5rem' }}>Add</button>
+        <button type="submit" className="todo-add-btn">Add</button>
       </form>
 
       {loading ? <p>Loading...</p> : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+        <ul className="todo-list">
           {todos.map(todo => (
-            <li key={todo._id} style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+            <li key={todo._id} className="todo-item">
               <input
                 type="checkbox"
                 checked={todo.completed}
                 onChange={() => toggleComplete(todo._id, todo.completed)}
-                style={{ marginRight: 8 }}
+                className="todo-checkbox"
               />
-              <span style={{
-                textDecoration: todo.completed ? 'line-through' : 'none',
-                flexGrow: 1
-              }}>{todo.text}</span>
-              <button onClick={() => deleteTodo(todo._id)} style={{ marginLeft: 8 }}>Delete</button>
+              <span className={`todo-text${todo.completed ? ' completed' : ''}`}>
+                {todo.text}
+              </span>
+              <button onClick={() => deleteTodo(todo._id)} className="todo-delete-btn">Delete</button>
             </li>
           ))}
         </ul>
