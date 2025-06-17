@@ -34,7 +34,7 @@ function App() {
 
   // Toggle complete
   const toggleComplete = async (id, completed) => {
-    await fetch(`${process.env.REACT_APP_API_URL}/${id}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ completed: !completed }),
