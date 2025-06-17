@@ -9,7 +9,7 @@ function App() {
   // Fetch todos from backend
   const fetchTodos = async () => {
     setLoading(true);
-    const res = await fetch('http://localhost:5000/api/todos');
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/todos`);
     const data = await res.json();
     setTodos(data);
     setLoading(false);
@@ -23,7 +23,7 @@ function App() {
   const addTodo = async (e) => {
     e.preventDefault();
     if (!text.trim()) return;
-    await fetch('http://localhost:5000/api/todos', {
+    await fetch(`${process.env.REACT_APP_API_URL}/todos`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text }),
@@ -34,7 +34,7 @@ function App() {
 
   // Toggle complete
   const toggleComplete = async (id, completed) => {
-    await fetch(`http://localhost:5000/api/todos/${id}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ completed: !completed }),
@@ -44,7 +44,7 @@ function App() {
 
   // Delete todo
   const deleteTodo = async (id) => {
-    await fetch(`http://localhost:5000/api/todos/${id}`, { method: 'DELETE' });
+    await fetch(`${process.env.REACT_APP_API_URL}/todos/${id}`, { method: 'DELETE' });
     fetchTodos();
   };
 
