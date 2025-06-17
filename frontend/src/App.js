@@ -9,7 +9,7 @@ function App() {
   // Fetch todos from backend
   const fetchTodos = async () => {
     setLoading(true);
-    const res = await fetch(`${process.env.REACT_APP_API_URL}todos`);
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/todos`);
     const data = await res.json();
     setTodos(data);
     setLoading(false);
